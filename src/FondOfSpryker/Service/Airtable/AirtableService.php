@@ -2,13 +2,13 @@
 
 namespace FondOfSpryker\Service\Airtable;
 
-use FondOf\Airtable\Table;
+use FondOf\Airtable\TableInterace;
 use Spryker\Service\Kernel\AbstractService;
 
 class AirtableService extends AbstractService
 {
     /**
-     * @var \FondOf\Airtable\Table
+     * @var \FondOf\Airtable\TableInterace
      */
     protected $table;
 
@@ -18,9 +18,9 @@ class AirtableService extends AbstractService
     }
 
     /**
-     * @return \FondOf\Airtable\Table
+     * @return \FondOf\Airtable\TableInterace
      */
-    public function getTable(): Table
+    public function getTable(): TableInterface
     {
         return $this->table;
     }

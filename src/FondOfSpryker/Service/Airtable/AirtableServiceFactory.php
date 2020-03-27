@@ -2,9 +2,9 @@
 
 namespace FondOfSpryker\Service\Airtable;
 
-use FondOf\Airtable\Table;
 use FondOfSpryker\Service\Airtable\Reader\Reader;
 use FondOfSpryker\Service\Airtable\Reader\ReaderInterface;
+use FondOfSpryker\Service\Airtable\Table\Table;
 use FondOfSpryker\Service\Airtable\Writer\Writer;
 use FondOfSpryker\Service\Airtable\Writer\WriterInterface;
 use Spryker\Service\Kernel\AbstractServiceFactory;
@@ -12,13 +12,15 @@ use Spryker\Service\Kernel\AbstractServiceFactory;
 class AirtableServiceFactory extends AbstractServiceFactory
 {
     /**
-     * @return \FondOf\Airtable\Table
+     * @return \FondOf\Airtable\TableInterace
+     *
+     * @throws \Spryker\Service\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function createTable(): Table
+    public function createTable(): TableInterface
     {
-        $client = $this->getProvidedDependency(AirtableServiceDependencyProvider::AIRTABLE_CLIENT);
+        $table = $this->getProvidedDependency(AirtableServiceDependencyProvider::AIRTABLE_TABLE);
 
-        return new Table($client);
+        return new Table($table);
     }
 
     /**
