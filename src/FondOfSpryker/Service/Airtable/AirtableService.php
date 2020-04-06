@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Service\Airtable;
 
-use FondOf\Airtable\TableInterace;
+use FondOf\Airtable\TableInterface;
 use Spryker\Service\Kernel\AbstractService;
 
 class AirtableService extends AbstractService
