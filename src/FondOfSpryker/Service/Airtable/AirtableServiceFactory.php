@@ -17,20 +17,20 @@ class AirtableServiceFactory extends AbstractServiceFactory
      */
     public function createTable(): TableInterface
     {
-        $table = $this->getProvidedDependency(AirtableServiceDependencyProvider::AIRTABLE_TABLE);
+        $table = $this->getProvidedDependency(AirtableDependencyProvider::AIRTABLE_TABLE);
 
         return new Table($table);
     }
 
     /**
-     * @param \FondOf\Airtable\Table $table
+     * @param \FondOf\Airtable\TableInterface $table
      * @param string $baseId
      * @param string $tableId
      * @param int|null $limit
      *
      * @return \FondOfSpryker\Service\Airtable\Reader\ReaderInterface
      */
-    public function createReader(Table $table, string $baseId, string $tableId, ?int $limit = null): ReaderInterface
+    public function createReader(TableInterface $table, string $baseId, string $tableId, ?int $limit = null): ReaderInterface
     {
         if ($limit !== null) {
             $table = $table->limit($limit);
@@ -40,13 +40,13 @@ class AirtableServiceFactory extends AbstractServiceFactory
     }
 
     /**
-     * @param \FondOf\Airtable\Table $table
+     * @param \FondOf\Airtable\TableInterface $table
      * @param string $baseId
      * @param string $tableId
      *
      * @return \FondOfSpryker\Service\Airtable\Writer\WriterInterface
      */
-    public function createWriter(Table $table, string $baseId, string $tableId): WriterInterface
+    public function createWriter(TableInterface $table, string $baseId, string $tableId): WriterInterface
     {
         return new Writer($table->base($baseId)->table($tableId));
     }

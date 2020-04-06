@@ -7,7 +7,7 @@ use FondOf\Airtable\Table;
 use Spryker\Service\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Service\Kernel\Container;
 
-class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
+class AirtableDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
      * Client Key
@@ -19,7 +19,7 @@ class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Service\Kernel\Container
      */
-    public function provideServiceDependencies(Container $container)
+    public function provideServiceDependencies(Container $container): Container
     {
         $container = $this->addAirtableTable($container);
 
@@ -31,7 +31,7 @@ class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Service\Kernel\Container
      */
-    public function addAirtableTable(Container $container): Container
+    protected function addAirtableTable(Container $container): Container
     {
         $container[self::AIRTABLE_TABLE] = function () {
             $client = (new Airtable([
@@ -40,5 +40,7 @@ class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
 
             return new Table($client);
         };
+
+        return $container;
     }
 }
