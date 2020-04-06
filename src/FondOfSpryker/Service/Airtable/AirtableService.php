@@ -7,7 +7,7 @@ use Spryker\Service\Kernel\AbstractService;
 class AirtableService extends AbstractService implements AirtableServiceInterface
 {
     /**
-     * @var \FondOf\Airtable\TableInterace
+     * @var \FondOf\Airtable\TableInterface
      */
     protected $table;
 

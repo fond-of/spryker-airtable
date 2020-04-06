@@ -2,18 +2,17 @@
 
 namespace FondOfSpryker\Service\Airtable\Writer;
 
-use FondOf\Airtable\Table;
-use FondOfSpryker\Service\Airtable\Table\TableInterface;
+use FondOf\Airtable\TableInterface;
 
 class Writer implements WriterInterface
 {
     /**
-     * @var FondOfSpryker\Service\Airtable\Table\TableInterface
+     * @var \FondOf\Airtable\TableInterface
      */
     protected $table;
 
     /**
-     * @param FondOfSpryker\Service\Airtable\Table\TableInterface $table
+     * @param \FondOf\Airtable\TableInterface $table
      */
     public function __construct(TableInterface $table)
     {

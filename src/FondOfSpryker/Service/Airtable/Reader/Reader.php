@@ -2,17 +2,17 @@
 
 namespace FondOfSpryker\Service\Airtable\Reader;
 
-use FondOfSpryker\Service\Airtable\Table\TableInterface;
+use FondOf\Airtable\TableInterface;
 
 class Reader implements ReaderInterface
 {
     /**
-     * @var \FondOfSpryker\Service\Airtable\Table\TableInterface
+     * @var \FondOf\Airtable\TableInterface
      */
     protected $table;
 
     /**
-     * @param \FondOfSpryker\Service\Airtable\Table\TableInterface $table
+     * @param \FondOf\Airtable\TableInterface $table
      */
     public function __construct(TableInterface $table)
     {

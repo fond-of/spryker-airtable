@@ -13,9 +13,7 @@ use Spryker\Service\Kernel\AbstractServiceFactory;
 class AirtableServiceFactory extends AbstractServiceFactory
 {
     /**
-     * @return \FondOf\Airtable\TableInterace
-     *
-     * @throws \Spryker\Service\Kernel\Exception\Container\ContainerKeyNotFoundException
+     * @return \FondOf\Airtable\TableInterface
      */
     public function createTable(): TableInterface
     {
@@ -37,6 +35,7 @@ class AirtableServiceFactory extends AbstractServiceFactory
         if ($limit !== null) {
             $table = $table->limit($limit);
         }
+
         return new Reader($table->base($baseId)->table($tableId));
     }
 

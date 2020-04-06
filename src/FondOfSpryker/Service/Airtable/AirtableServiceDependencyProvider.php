@@ -2,10 +2,9 @@
 
 namespace FondOfSpryker\Service\Airtable;
 
+use FondOf\Airtable\Airtable;
 use FondOf\Airtable\Table;
 use Spryker\Service\Kernel\AbstractBundleDependencyProvider;
-use FondOf\Airtable\Airtable;
-use FondOfSpryker\Shared\Airtable\AirtableConstants;
 use Spryker\Service\Kernel\Container;
 
 class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
@@ -22,7 +21,7 @@ class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function provideServiceDependencies(Container $container)
     {
-        $container = $this->addAirtableTable();
+        $container = $this->addAirtableTable($container);
 
         return $container;
     }
@@ -34,11 +33,12 @@ class AirtableServiceDependencyProvider extends AbstractBundleDependencyProvider
      */
     public function addAirtableTable(Container $container): Container
     {
-        return $container->set(self::AIRTABLE_TABLE, function (Container $container) {
+        $container[self::AIRTABLE_TABLE] = function () {
             $client = (new Airtable([
-                'apiKey' => $this->getConfig(AirtableConstants::AIRTABLE_APIKEY),
+                'apiKey' => $this->getConfig()->getApiKey(),
             ]))->createApiClient();
+
             return new Table($client);
-        });
+        };
     }
 }
