@@ -2,14 +2,14 @@
 
 namespace FondOfSpryker\Service\Airtable\Table;
 
-use FondOf\Airtable\TableInterace;
+use FondOf\Airtable\TableInterface;
 
 class Table implements TableInterace
 {
     /**
      * @param \FondOf\Airtable\TableInterace $table
      */
-    public function __construct(TableInterace $table)
+    public function __construct(TableInterface $table)
     {
         $this->table = $table;
     }

@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Service\Airtable;
 
+use FondOf\Airtable\TableInterface;
 use FondOfSpryker\Service\Airtable\Reader\Reader;
 use FondOfSpryker\Service\Airtable\Reader\ReaderInterface;
 use FondOfSpryker\Service\Airtable\Table\Table;
