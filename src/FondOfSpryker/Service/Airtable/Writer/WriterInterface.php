@@ -2,12 +2,15 @@
 
 namespace FondOfSpryker\Service\Airtable\Writer;
 
+use Generated\Shared\Transfer\AirtableRequestDataTransfer;
+use Generated\Shared\Transfer\AirtableResponseDataTransfer;
+
 interface WriterInterface
 {
     /**
-     * @param array $fields
+     * @param \Generated\Shared\Transfer\AirtableRequestDataTransfer $airtableRequestDataTransfer
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
-    public function writeRecord(array $fields): string;
+    public function writeRecord(AirtableRequestDataTransfer $airtableRequestDataTransfer): AirtableResponseDataTransfer;
 }

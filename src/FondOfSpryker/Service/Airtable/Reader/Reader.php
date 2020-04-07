@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Service\Airtable\Reader;
 
 use FondOf\Airtable\TableInterface;
+use FondOfSpryker\Service\Airtable\Mapper\AirtableMapperInterface;
+use Generated\Shared\Transfer\AirtableResponseDataTransfer;
 
 class Reader implements ReaderInterface
 {
@@ -12,28 +14,39 @@ class Reader implements ReaderInterface
     protected $table;
 
     /**
-     * @param \FondOf\Airtable\TableInterface $table
+     * @var \FondOfSpryker\Service\Airtable\Mapper\AirtableMapperInterface
      */
-    public function __construct(TableInterface $table)
+    protected $mapper;
+
+    /**
+     * @param \FondOf\Airtable\TableInterface $table
+     * @param \FondOfSpryker\Service\Airtable\Mapper\AirtableMapperInterface $mapper
+     */
+    public function __construct(TableInterface $table, AirtableMapperInterface $mapper)
     {
         $this->table = $table;
+        $this->mapper = $mapper;
     }
 
     /**
      * @param string $recordId
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
-    public function getRecord(string $recordId): string
+    public function getRecord(string $recordId): AirtableResponseDataTransfer
     {
-        return $this->table->getRecord($recordId);
+        return $this->mapper->mapSingleRecord(
+            $this->table->getRecord($recordId)
+        );
     }
 
     /**
-     * @return string
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
-    public function getRecords(): string
+    public function getRecords(): AirtableResponseDataTransfer
     {
-        return $this->table->getRecords();
+        return $this->mapper->mapMultipleRecords(
+            $this->table->getRecords()
+        );
     }
 }
