@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Service\Airtable;
 
 use FondOf\Airtable\TableInterface;
+use FondOfSpryker\Service\Airtable\Mapper\AirtableMapperInterface;
+use FondOfSpryker\Service\Airtable\Mapper\AirtableResponseMapper;
 use FondOfSpryker\Service\Airtable\Reader\Reader;
 use FondOfSpryker\Service\Airtable\Reader\ReaderInterface;
 use FondOfSpryker\Service\Airtable\Table\Table;
@@ -36,7 +38,10 @@ class AirtableServiceFactory extends AbstractServiceFactory
             $table = $table->limit($limit);
         }
 
-        return new Reader($table->base($baseId)->table($tableId));
+        return new Reader(
+            $table->base($baseId)->table($tableId),
+            $this->createAirtableResponseMapper()
+        );
     }
 
     /**
@@ -48,6 +53,17 @@ class AirtableServiceFactory extends AbstractServiceFactory
      */
     public function createWriter(TableInterface $table, string $baseId, string $tableId): WriterInterface
     {
-        return new Writer($table->base($baseId)->table($tableId));
+        return new Writer(
+            $table->base($baseId)->table($tableId),
+            $this->createAirtableResponseMapper()
+        );
+    }
+
+    /**
+     * @return \FondOfSpryker\Service\Airtable\Mapper\AirtableMapperInterface
+     */
+    public function createAirtableResponseMapper(): AirtableMapperInterface
+    {
+        return new AirtableResponseMapper();
     }
 }

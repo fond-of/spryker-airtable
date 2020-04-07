@@ -2,17 +2,19 @@
 
 namespace FondOfSpryker\Service\Airtable\Reader;
 
+use Generated\Shared\Transfer\AirtableResponseDataTransfer;
+
 interface ReaderInterface
 {
     /**
      * @param string $recordId
      *
-     * @return string
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
-    public function getRecord(string $recordId): string;
+    public function getRecord(string $recordId): AirtableResponseDataTransfer;
 
     /**
-     * @return string
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
-    public function getRecords(): string;
+    public function getRecords(): AirtableResponseDataTransfer;
 }
