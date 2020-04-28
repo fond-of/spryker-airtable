@@ -2,26 +2,32 @@
 
 namespace FondOfSpryker\Service\Airtable\Writer;
 
+use Codeception\Stub\Expected;
 use Codeception\Test\Unit;
 use FondOf\Airtable\Table;
+use FondOfSpryker\Service\Airtable\Mapper\AirtableResponseMapper;
+use Generated\Shared\Transfer\AirtableRequestDataTransfer;
+use Generated\Shared\Transfer\AirtableResponseDataTransfer;
 
 class WriterTest extends Unit
 {
     /**
-     * @throws \Exception
+     * @return void
      */
-    public function test_write_record()
+    public function testWriteRecord()
     {
-        $table = $this->makeEmpty(Table::class, [
-            'writeRecord' => function (array $fields) {
-                return 'success';
-            }
+        $table = $this->make(Table::class, [
+            'writeRecord' => Expected::once('success'),
         ]);
 
-        $writer = new Writer($table);
-        $fields = [];
-        $result = $writer->writeRecord($fields);
+        $mapper = $this->make(AirtableResponseMapper::class, [
+            'mapSingleRecord' => Expected::once(new AirtableResponseDataTransfer()),
+        ]);
 
-        $this->assertEquals('success', $result);
+        $writer = new Writer($table, $mapper);
+        $requestTransfer = new AirtableRequestDataTransfer();
+        $result = $writer->writeRecord($requestTransfer);
+
+        $this->assertInstanceOf(AirtableResponseDataTransfer::class, $result);
     }
 }

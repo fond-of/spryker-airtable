@@ -2,47 +2,48 @@
 
 namespace FondOfSpryker\Service\Airtable\Reader;
 
+use Codeception\Stub\Expected;
 use Codeception\Test\Unit;
 use FondOf\Airtable\Table;
+use FondOfSpryker\Service\Airtable\Mapper\AirtableResponseMapper;
+use Generated\Shared\Transfer\AirtableResponseDataTransfer;
 
 class ReaderTest extends Unit
 {
     /**
-     * @var $table
+     * @return void
      */
-    private $table;
-
-    /**
-     * @throws \Exception
-     */
-    public function test_get_record_by_id()
+    public function testGetRecordById()
     {
-        $table = $this->makeEmpty(Table::class, [
-            'getRecord' => function (string $recordId) {
-                return $recordId;
-            }
+        $table = $this->make(Table::class, [
+            'getRecord' => Expected::once('foobar'),
+        ]);
+        $mapper = $this->make(AirtableResponseMapper::class, [
+            'mapSingleRecord' => Expected::once(new AirtableResponseDataTransfer()),
         ]);
 
-        $reader = new Reader($table);
+        $reader = new Reader($table, $mapper);
         $record = $reader->getRecord('foobar');
 
-        $this->assertEquals('foobar', $record);
+        $this->assertInstanceOf(AirtableResponseDataTransfer::class, $record);
     }
 
     /**
-     * @throws \Exception
+     * @return void
      */
-    public function test_get_records()
+    public function testGetRecords()
     {
-        $table = $this->makeEmpty(Table::class, [
-            'getRecords' => function () {
-                return 'foobar';
-            },
+        $table = $this->make(Table::class, [
+            'getRecords' => Expected::once('foobar'),
         ]);
 
-        $reader = new Reader($table);
+        $mapper = $this->make(AirtableResponseMapper::class, [
+            'mapMultipleRecords' => Expected::once(new AirtableResponseDataTransfer()),
+        ]);
+
+        $reader = new Reader($table, $mapper);
         $record = $reader->getRecords();
 
-        $this->assertEquals('foobar', $record);
+        $this->assertInstanceOf(AirtableResponseDataTransfer::class, $record);
     }
 }

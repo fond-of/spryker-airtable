@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "ext-json": "*",
     "php": ">=7.1",
     "fond-of/php-airtable-sdk": "^1.0@beta"
   },
