@@ -7,6 +7,12 @@ use Generated\Shared\Transfer\AirtableResponseDataTransfer;
 use Spryker\Service\Kernel\AbstractService;
 use SprykerSdk\Spryk\Exception\ArgumentNotFoundException;
 
+/**
+ * Class AirtableService
+ *
+ * @package FondOfSpryker\Service\Airtable
+ * @method \FondOfSpryker\Service\Airtable\AirtableServiceFactory getFactory()
+ */
 class AirtableService extends AbstractService implements AirtableServiceInterface
 {
     /**
@@ -24,13 +30,13 @@ class AirtableService extends AbstractService implements AirtableServiceInterfac
      * @param string $tableId
      * @param \Generated\Shared\Transfer\AirtableRequestDataTransfer $airtableRequestDataTransfer
      *
-     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
-     *
      * @throws \SprykerSdk\Spryk\Exception\ArgumentNotFoundException
+     *
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
     public function writeRecord(string $baseId, string $tableId, AirtableRequestDataTransfer $airtableRequestDataTransfer): AirtableResponseDataTransfer
     {
-        if($baseId === '' || $tableId === '') {
+        if ($baseId === '' || $tableId === '') {
             throw new ArgumentNotFoundException('Base ID or Table ID not set.');
         }
 
@@ -42,13 +48,13 @@ class AirtableService extends AbstractService implements AirtableServiceInterfac
      * @param string $tableId
      * @param string $recordId
      *
-     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
-     *
      * @throws \SprykerSdk\Spryk\Exception\ArgumentNotFoundException
+     *
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
     public function getRecord(string $baseId, string $tableId, string $recordId): AirtableResponseDataTransfer
     {
-        if($baseId === '' || $tableId === '') {
+        if ($baseId === '' || $tableId === '') {
             throw new ArgumentNotFoundException('Base ID or Table ID not set.');
         }
 
@@ -60,13 +66,13 @@ class AirtableService extends AbstractService implements AirtableServiceInterfac
      * @param string $tableId
      * @param int|null $limit
      *
-     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
-     *
      * @throws \SprykerSdk\Spryk\Exception\ArgumentNotFoundException
+     *
+     * @return \Generated\Shared\Transfer\AirtableResponseDataTransfer
      */
     public function getRecords(string $baseId, string $tableId, ?int $limit = null): AirtableResponseDataTransfer
     {
-        if($baseId === '' || $tableId === '') {
+        if ($baseId === '' || $tableId === '') {
             throw new ArgumentNotFoundException('Base ID or Table ID not set.');
         }
 

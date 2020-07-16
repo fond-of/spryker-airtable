@@ -7,6 +7,12 @@ use FondOf\Airtable\Table;
 use Spryker\Service\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Service\Kernel\Container;
 
+/**
+ * Class AirtableDependencyProvider
+ *
+ * @package FondOfSpryker\Service\Airtable
+ * @method \FondOfSpryker\Service\Airtable\AirtableConfig getConfig()
+ */
 class AirtableDependencyProvider extends AbstractBundleDependencyProvider
 {
     /**
