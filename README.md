@@ -1,4 +1,6 @@
-# Airtable Service
+# [Discontinued] Airtable Service
+
+**This repository is discontinued without any replacement.**
 
 ## Installation
 
